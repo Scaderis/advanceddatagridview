@@ -15,7 +15,7 @@ namespace Zuby.ADGV
 {
 
     [System.ComponentModel.DesignerCategory("")]
-    internal class ColumnHeaderCell : DataGridViewColumnHeaderCell
+    internal class ColumnHeaderCell : DataGridViewColumnHeaderCell, ICloneable, IDisposable
     {
 
         #region public events
@@ -59,6 +59,16 @@ namespace Zuby.ADGV
         /// Get the MenuStrip for this ColumnHeaderCell
         /// </summary>
         public MenuStrip MenuStrip { get; private set; }
+
+        /// <summary>
+        /// Control vertical direction for header text
+        /// </summary>
+        public bool DirectionVertical { get; set; } = false;
+
+        /// <summary>
+        /// Control the maximum header height
+        /// </summary>
+        public int MaxHeaderHeight { get; set; } = 100; // You can adjust this value as needed
 
         #endregion
 
@@ -655,6 +665,73 @@ namespace Zuby.ADGV
             // Don't display a dropdown for Image columns
             if (this.OwningColumn.ValueType == typeof(Bitmap))
                 return;
+
+            // Draw the header text with vertical option
+            if (paintParts.HasFlag(DataGridViewPaintParts.ContentForeground) && value != null)
+            {
+                string headerText = value.ToString();
+                using (Brush textBrush = new SolidBrush(cellStyle.ForeColor))
+                {
+                    StringFormat format = new StringFormat
+                    {
+                        Alignment = StringAlignment.Center,
+                        LineAlignment = StringAlignment.Center,
+                        Trimming = StringTrimming.EllipsisCharacter
+                    };
+
+                    Rectangle textRect = cellBounds;
+
+                    // Measure the string size
+                    SizeF textSize;
+                    if (DirectionVertical)
+                    {
+                        // Measure as if vertical
+                        textSize = graphics.MeasureString(headerText, cellStyle.Font, 999, format);
+                        int requiredHeight = (int)Math.Ceiling(textSize.Width);
+                        if (requiredHeight > MaxHeaderHeight)
+                            requiredHeight = MaxHeaderHeight;
+
+                        // Adjust the cell height if needed
+                        if (this.OwningColumn != null && this.DataGridView != null)
+                        {
+                            if (this.DataGridView.ColumnHeadersHeight < requiredHeight)
+                                this.DataGridView.ColumnHeadersHeight = requiredHeight;
+                        }
+
+                        // Draw vertical text
+                        graphics.TranslateTransform(
+                            textRect.Left + textRect.Width / 2,
+                            textRect.Top + textRect.Height / 2);
+                        graphics.RotateTransform(-90);
+                        graphics.DrawString(headerText, cellStyle.Font, textBrush,
+                            new RectangleF(
+                                -textRect.Height / 2,
+                                -textRect.Width / 2,
+                                textRect.Height,
+                                textRect.Width),
+                            format);
+                        graphics.ResetTransform();
+                    }
+                    else
+                    {
+                        // Measure as normal
+                        textSize = graphics.MeasureString(headerText, cellStyle.Font, textRect.Width, format);
+                        int requiredHeight = (int)Math.Ceiling(textSize.Height);
+                        if (requiredHeight > MaxHeaderHeight)
+                            requiredHeight = MaxHeaderHeight;
+
+                        // Adjust the cell height if needed
+                        if (this.OwningColumn != null && this.DataGridView != null)
+                        {
+                            if (this.DataGridView.ColumnHeadersHeight < requiredHeight)
+                                this.DataGridView.ColumnHeadersHeight = requiredHeight;
+                        }
+
+                        // Draw horizontal text
+                        graphics.DrawString(headerText, cellStyle.Font, textBrush, textRect, format);
+                    }
+                }
+            }
 
             if (FilterAndSortEnabled && paintParts.HasFlag(DataGridViewPaintParts.ContentBackground))
             {

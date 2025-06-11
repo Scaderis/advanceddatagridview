@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel_top = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.comboBox_memorytest = new System.Windows.Forms.ComboBox();
             this.button_memorytest = new System.Windows.Forms.Button();
             this.label_strfilter = new System.Windows.Forms.Label();
@@ -57,6 +58,7 @@
             this.bindingSource_main = new System.Windows.Forms.BindingSource(this.components);
             this.statusStrip_main = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_memory = new System.Windows.Forms.ToolStripStatusLabel();
+            this.button_toggleVerticalHeader = new System.Windows.Forms.Button();
             this.panel_top.SuspendLayout();
             this.panel_search.SuspendLayout();
             this.panel_grid.SuspendLayout();
@@ -68,6 +70,7 @@
             // 
             // panel_top
             // 
+            this.panel_top.Controls.Add(this.button1);
             this.panel_top.Controls.Add(this.comboBox_memorytest);
             this.panel_top.Controls.Add(this.button_memorytest);
             this.panel_top.Controls.Add(this.label_strfilter);
@@ -88,8 +91,18 @@
             this.panel_top.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_top.Location = new System.Drawing.Point(0, 0);
             this.panel_top.Name = "panel_top";
-            this.panel_top.Size = new System.Drawing.Size(784, 192);
+            this.panel_top.Size = new System.Drawing.Size(971, 192);
             this.panel_top.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(484, 123);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(122, 31);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Set Vertical Mode";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboBox_memorytest
             // 
@@ -107,7 +120,7 @@
             // button_memorytest
             // 
             this.button_memorytest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_memorytest.Location = new System.Drawing.Point(141, 10);
+            this.button_memorytest.Location = new System.Drawing.Point(328, 10);
             this.button_memorytest.Name = "button_memorytest";
             this.button_memorytest.Size = new System.Drawing.Size(100, 23);
             this.button_memorytest.TabIndex = 20;
@@ -186,7 +199,7 @@
             this.panel_search.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_search.Location = new System.Drawing.Point(0, 164);
             this.panel_search.Name = "panel_search";
-            this.panel_search.Size = new System.Drawing.Size(784, 28);
+            this.panel_search.Size = new System.Drawing.Size(971, 28);
             this.panel_search.TabIndex = 10;
             // 
             // advancedDataGridViewSearchToolBar_main
@@ -198,7 +211,7 @@
             this.advancedDataGridViewSearchToolBar_main.MinimumSize = new System.Drawing.Size(0, 27);
             this.advancedDataGridViewSearchToolBar_main.Name = "advancedDataGridViewSearchToolBar_main";
             this.advancedDataGridViewSearchToolBar_main.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.advancedDataGridViewSearchToolBar_main.Size = new System.Drawing.Size(784, 27);
+            this.advancedDataGridViewSearchToolBar_main.Size = new System.Drawing.Size(971, 27);
             this.advancedDataGridViewSearchToolBar_main.TabIndex = 0;
             this.advancedDataGridViewSearchToolBar_main.Text = "advancedDataGridViewSearchToolBar_main";
             this.advancedDataGridViewSearchToolBar_main.Search += new Zuby.ADGV.AdvancedDataGridViewSearchToolBarSearchEventHandler(this.advancedDataGridViewSearchToolBar_main_Search);
@@ -206,7 +219,7 @@
             // button_unloadfilters
             // 
             this.button_unloadfilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_unloadfilters.Location = new System.Drawing.Point(425, 37);
+            this.button_unloadfilters.Location = new System.Drawing.Point(612, 37);
             this.button_unloadfilters.Name = "button_unloadfilters";
             this.button_unloadfilters.Size = new System.Drawing.Size(150, 23);
             this.button_unloadfilters.TabIndex = 9;
@@ -218,7 +231,7 @@
             // 
             this.label_sortsaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_sortsaved.AutoSize = true;
-            this.label_sortsaved.Location = new System.Drawing.Point(587, 42);
+            this.label_sortsaved.Location = new System.Drawing.Point(774, 42);
             this.label_sortsaved.Name = "label_sortsaved";
             this.label_sortsaved.Size = new System.Drawing.Size(61, 13);
             this.label_sortsaved.TabIndex = 8;
@@ -228,7 +241,7 @@
             // 
             this.label_filtersaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_filtersaved.AutoSize = true;
-            this.label_filtersaved.Location = new System.Drawing.Point(584, 15);
+            this.label_filtersaved.Location = new System.Drawing.Point(771, 15);
             this.label_filtersaved.Name = "label_filtersaved";
             this.label_filtersaved.Size = new System.Drawing.Size(64, 13);
             this.label_filtersaved.TabIndex = 7;
@@ -238,7 +251,7 @@
             // 
             this.comboBox_sortsaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_sortsaved.FormattingEnabled = true;
-            this.comboBox_sortsaved.Location = new System.Drawing.Point(651, 39);
+            this.comboBox_sortsaved.Location = new System.Drawing.Point(838, 39);
             this.comboBox_sortsaved.Name = "comboBox_sortsaved";
             this.comboBox_sortsaved.Size = new System.Drawing.Size(121, 21);
             this.comboBox_sortsaved.TabIndex = 6;
@@ -246,7 +259,7 @@
             // button_setsavedfilter
             // 
             this.button_setsavedfilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_setsavedfilter.Location = new System.Drawing.Point(697, 66);
+            this.button_setsavedfilter.Location = new System.Drawing.Point(884, 66);
             this.button_setsavedfilter.Name = "button_setsavedfilter";
             this.button_setsavedfilter.Size = new System.Drawing.Size(75, 23);
             this.button_setsavedfilter.TabIndex = 5;
@@ -257,7 +270,7 @@
             // button_savefilters
             // 
             this.button_savefilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_savefilters.Location = new System.Drawing.Point(425, 10);
+            this.button_savefilters.Location = new System.Drawing.Point(612, 10);
             this.button_savefilters.Name = "button_savefilters";
             this.button_savefilters.Size = new System.Drawing.Size(150, 23);
             this.button_savefilters.TabIndex = 3;
@@ -269,7 +282,7 @@
             // 
             this.comboBox_filtersaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_filtersaved.FormattingEnabled = true;
-            this.comboBox_filtersaved.Location = new System.Drawing.Point(651, 12);
+            this.comboBox_filtersaved.Location = new System.Drawing.Point(838, 12);
             this.comboBox_filtersaved.Name = "comboBox_filtersaved";
             this.comboBox_filtersaved.Size = new System.Drawing.Size(121, 21);
             this.comboBox_filtersaved.TabIndex = 2;
@@ -298,7 +311,7 @@
             this.panel_grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_grid.Location = new System.Drawing.Point(0, 192);
             this.panel_grid.Name = "panel_grid";
-            this.panel_grid.Size = new System.Drawing.Size(784, 247);
+            this.panel_grid.Size = new System.Drawing.Size(971, 272);
             this.panel_grid.TabIndex = 1;
             // 
             // advancedDataGridView_main
@@ -309,15 +322,17 @@
             this.advancedDataGridView_main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.advancedDataGridView_main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.advancedDataGridView_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.advancedDataGridView_main.DirectionVertical = true;
             this.advancedDataGridView_main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.advancedDataGridView_main.FilterAndSortEnabled = true;
             this.advancedDataGridView_main.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             this.advancedDataGridView_main.Location = new System.Drawing.Point(0, 0);
+            this.advancedDataGridView_main.MaxFilterButtonImageHeight = 23;
             this.advancedDataGridView_main.Name = "advancedDataGridView_main";
             this.advancedDataGridView_main.ReadOnly = true;
             this.advancedDataGridView_main.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.advancedDataGridView_main.RowHeadersVisible = false;
-            this.advancedDataGridView_main.Size = new System.Drawing.Size(784, 213);
+            this.advancedDataGridView_main.Size = new System.Drawing.Size(971, 238);
             this.advancedDataGridView_main.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.advancedDataGridView_main.TabIndex = 0;
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.SortEventArgs>(this.advancedDataGridView_main_SortStringChanged);
@@ -328,9 +343,9 @@
             this.panel_bottom.Controls.Add(this.textBox_total);
             this.panel_bottom.Controls.Add(this.label_total);
             this.panel_bottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_bottom.Location = new System.Drawing.Point(0, 213);
+            this.panel_bottom.Location = new System.Drawing.Point(0, 238);
             this.panel_bottom.Name = "panel_bottom";
-            this.panel_bottom.Size = new System.Drawing.Size(784, 34);
+            this.panel_bottom.Size = new System.Drawing.Size(971, 34);
             this.panel_bottom.TabIndex = 2;
             // 
             // bindingSource_main
@@ -341,9 +356,9 @@
             // 
             this.statusStrip_main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel_memory});
-            this.statusStrip_main.Location = new System.Drawing.Point(0, 439);
+            this.statusStrip_main.Location = new System.Drawing.Point(0, 464);
             this.statusStrip_main.Name = "statusStrip_main";
-            this.statusStrip_main.Size = new System.Drawing.Size(784, 22);
+            this.statusStrip_main.Size = new System.Drawing.Size(971, 22);
             this.statusStrip_main.TabIndex = 2;
             this.statusStrip_main.Text = "statusStrip1";
             // 
@@ -353,11 +368,18 @@
             this.toolStripStatusLabel_memory.Size = new System.Drawing.Size(116, 17);
             this.toolStripStatusLabel_memory.Text = "Memory Usage: /Mb";
             // 
+            // button_toggleVerticalHeader
+            // 
+            this.button_toggleVerticalHeader.Location = new System.Drawing.Point(100, 100);
+            this.button_toggleVerticalHeader.Name = "button_toggleVerticalHeader";
+            this.button_toggleVerticalHeader.Size = new System.Drawing.Size(75, 23);
+            this.button_toggleVerticalHeader.TabIndex = 0;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.ClientSize = new System.Drawing.Size(971, 486);
             this.Controls.Add(this.panel_grid);
             this.Controls.Add(this.statusStrip_main);
             this.Controls.Add(this.panel_top);
@@ -410,6 +432,8 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_memory;
         private System.Windows.Forms.Button button_memorytest;
         private System.Windows.Forms.ComboBox comboBox_memorytest;
+        private System.Windows.Forms.Button button_toggleVerticalHeader;
+        private System.Windows.Forms.Button button1;
     }
 }
 

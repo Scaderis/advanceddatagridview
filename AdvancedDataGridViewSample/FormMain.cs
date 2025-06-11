@@ -310,6 +310,11 @@ namespace AdvancedDataGridViewSample
                 advancedDataGridView_main.CurrentCell = c;
         }
 
+        private void button_toggleVerticalHeader_Click(object sender, EventArgs e)
+        {
+            // Toggle the DirectionVertical property for all columns at once
+            advancedDataGridView_main.DirectionVertical = !advancedDataGridView_main.DirectionVertical;
+        }
 
         private void _timermemoryusage_Tick(object sender, EventArgs e)
         {
@@ -411,6 +416,12 @@ namespace AdvancedDataGridViewSample
         {
             _dataTable.Rows.Clear();
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Toggle the DirectionVertical property for all columns at once
+            advancedDataGridView_main.DirectionVertical = !advancedDataGridView_main.DirectionVertical;
         }
     }
 }

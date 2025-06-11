@@ -1284,6 +1284,38 @@ namespace Zuby.ADGV
             }
         }
 
+        /// <summary>
+        /// Gets or sets the vertical direction for all column header texts.
+        /// </summary>
+        public bool DirectionVertical
+        {
+            get
+            {
+                // Return true if all header cells are vertical, false otherwise
+                foreach (DataGridViewColumn col in this.Columns)
+                {
+                    if (col.HeaderCell is ColumnHeaderCell headerCell)
+                    {
+                        if (!headerCell.DirectionVertical)
+                            return false;
+                    }
+                }
+                return true;
+            }
+            set
+            {
+                foreach (DataGridViewColumn col in this.Columns)
+                {
+                    if (col.HeaderCell is ColumnHeaderCell headerCell)
+                    {
+                        headerCell.DirectionVertical = value;
+                        this.InvalidateCell(headerCell);
+                    }
+                }
+                this.Invalidate();
+            }
+        }
+
         #endregion
 
 
