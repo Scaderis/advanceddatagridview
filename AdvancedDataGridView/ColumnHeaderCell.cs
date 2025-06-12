@@ -69,6 +69,7 @@ namespace Zuby.ADGV
         /// Control the maximum header height
         /// </summary>
         public int MaxHeaderHeight { get; set; } = 100; // You can adjust this value as needed
+        public int MinColumnWidth { get; set; } = 50; // You can adjust this value as needed
 
         #endregion
 
@@ -658,9 +659,11 @@ namespace Zuby.ADGV
             if (SortGlyphDirection != SortOrder.None)
                 SortGlyphDirection = SortOrder.None;
 
+            // Prevent base from drawing the header text
+            var basePaintParts = paintParts & ~DataGridViewPaintParts.ContentForeground;
             base.Paint(graphics, clipBounds, cellBounds, rowIndex,
                 cellState, value, formattedValue,
-                errorText, cellStyle, advancedBorderStyle, paintParts);
+                errorText, cellStyle, advancedBorderStyle, basePaintParts);
 
             // Don't display a dropdown for Image columns
             if (this.OwningColumn.ValueType == typeof(Bitmap))
@@ -674,7 +677,7 @@ namespace Zuby.ADGV
                 {
                     StringFormat format = new StringFormat
                     {
-                        Alignment = StringAlignment.Center,
+                        Alignment = StringAlignment.Near,
                         LineAlignment = StringAlignment.Center,
                         Trimming = StringTrimming.EllipsisCharacter
                     };
@@ -763,6 +766,73 @@ namespace Zuby.ADGV
                 (withOffset ? cell.Bottom + 2 : cell.Height) - _filterButtonImageSize.Height - _filterButtonMargin.Bottom);
 
             return new Rectangle(p, _filterButtonImageSize);
+        }
+
+        /// <summary>
+        /// Recalculate header height for all columns
+        /// </summary>
+        /// <param name="dgv"></param>
+        public static void RecalculateColumnHeadersHeight(DataGridView dgv)
+        {
+            if (dgv == null || dgv.Columns.Count == 0)
+                return;
+
+            int maxHeight = 0;
+            int maxAllowed = int.MaxValue;
+
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+
+            // Find the maximum required height and the minimum MaxHeaderHeight among all columns
+            foreach (DataGridViewColumn col in dgv.Columns)
+            {
+                if (col.HeaderCell is ColumnHeaderCell headerCell)
+                {
+                    // Set the minimum width for the column based on MinCoulmWidth
+                    col.MinimumWidth = headerCell.MinColumnWidth;
+
+                    string headerText = col.HeaderText;
+                    using (Graphics g = dgv.CreateGraphics())
+                    {
+                        StringFormat format = new StringFormat
+                        {
+                            Alignment = StringAlignment.Near,
+                            LineAlignment = StringAlignment.Center,
+                            Trimming = StringTrimming.EllipsisCharacter
+                        };
+                        SizeF textSize;
+                        if (headerCell.DirectionVertical)
+                        {
+                            textSize = g.MeasureString(headerText, dgv.ColumnHeadersDefaultCellStyle.Font ?? dgv.Font, 999, format);
+                            maxHeight = Math.Max(maxHeight, (int)Math.Ceiling(textSize.Width));
+                            col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+                        }
+                        else
+                        {
+                            //    textSize = g.MeasureString(headerText, dgv.ColumnHeadersDefaultCellStyle.Font ?? dgv.Font, col.Width, format);
+                            //    maxHeight = Math.Max(maxHeight, (int)Math.Ceiling(textSize.Height));
+                            col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                            dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                        }
+                    }
+                    // Find the smallest MaxHeaderHeight among all columns
+                    if (headerCell.MaxHeaderHeight < maxAllowed)
+                        maxAllowed = headerCell.MaxHeaderHeight;
+                }
+            }
+
+            // Add padding
+            maxHeight += 8;
+
+            // Cap to the minimum MaxHeaderHeight found
+            if (maxHeight > maxAllowed)
+                maxHeight = maxAllowed;
+
+            // Only set if changed
+            if (dgv.ColumnHeadersHeight != maxHeight)
+                dgv.ColumnHeadersHeight = maxHeight;
+
+
+
         }
 
         #endregion

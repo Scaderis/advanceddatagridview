@@ -1312,6 +1312,7 @@ namespace Zuby.ADGV
                         this.InvalidateCell(headerCell);
                     }
                 }
+                ColumnHeaderCell.RecalculateColumnHeadersHeight(this);
                 this.Invalidate();
             }
         }
