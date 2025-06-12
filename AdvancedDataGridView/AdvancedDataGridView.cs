@@ -1283,7 +1283,13 @@ namespace Zuby.ADGV
                 _maxFilterButtonImageHeight = value > ColumnHeaderCell.FilterButtonImageDefaultSize ? value : ColumnHeaderCell.FilterButtonImageDefaultSize;
             }
         }
+        #endregion
 
+        #region public Cell methods & properties for Vertical Header Title
+        /// <summary>
+        /// Gets or sets the Nb fixed columns.
+        /// </summary>
+        public int NbFixedColumns { get; set; } = 2;
         /// <summary>
         /// Gets or sets the vertical direction for all column header texts.
         /// </summary>
@@ -1296,27 +1302,52 @@ namespace Zuby.ADGV
                 {
                     if (col.HeaderCell is ColumnHeaderCell headerCell)
                     {
-                        if (!headerCell.DirectionVertical)
-                            return false;
+                        if (headerCell.DirectionVertical)
+                            return true;
                     }
                 }
-                return true;
+                return false;
             }
             set
             {
+                int colIndex = 0;
                 foreach (DataGridViewColumn col in this.Columns)
                 {
                     if (col.HeaderCell is ColumnHeaderCell headerCell)
                     {
-                        headerCell.DirectionVertical = value;
-                        this.InvalidateCell(headerCell);
+                        if (colIndex < NbFixedColumns)
+                        {
+                            headerCell.DirectionVertical = false;
+                        }
+                        else
+                        {
+                            headerCell.DirectionVertical = value;
+                            this.InvalidateCell(headerCell);
+                        }
                     }
+                    if (value)
+                        col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    else
+                        col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+
+                    colIndex++;
                 }
-                ColumnHeaderCell.RecalculateColumnHeadersHeight(this);
-                this.Invalidate();
+                if (value)
+                {
+                    ColumnHeaderCell.RecalculateColumnHeadersHeight(this);
+                    this.Invalidate();
+                }
+                else
+                {
+                    // Reset the height of the column headers to the default size
+                    //ColumnHeadersHeight =  23;
+                    ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                    this.Invalidate();
+                }
+                    
             }
         }
-
+       
         #endregion
 
 

@@ -804,15 +804,8 @@ namespace Zuby.ADGV
                         {
                             textSize = g.MeasureString(headerText, dgv.ColumnHeadersDefaultCellStyle.Font ?? dgv.Font, 999, format);
                             maxHeight = Math.Max(maxHeight, (int)Math.Ceiling(textSize.Width));
-                            col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
                         }
-                        else
-                        {
-                            //    textSize = g.MeasureString(headerText, dgv.ColumnHeadersDefaultCellStyle.Font ?? dgv.Font, col.Width, format);
-                            //    maxHeight = Math.Max(maxHeight, (int)Math.Ceiling(textSize.Height));
-                            col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                            dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-                        }
+
                     }
                     // Find the smallest MaxHeaderHeight among all columns
                     if (headerCell.MaxHeaderHeight < maxAllowed)
