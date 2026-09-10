@@ -1324,11 +1324,17 @@ namespace Zuby.ADGV
                             headerCell.DirectionVertical = value;
                             this.InvalidateCell(headerCell);
                         }
+                        EnableFilterAndSort(col);
                     }
                     if (value)
+                    {
                         col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    }
                     else
+                    {
                         col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+                    }
+                        
 
                     colIndex++;
                 }

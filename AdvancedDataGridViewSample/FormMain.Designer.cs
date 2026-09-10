@@ -31,7 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel_top = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.lblMinColumnWidth = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.lblMaxHeaderHeight = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.lblNbFixedColumn = new System.Windows.Forms.Label();
+            this.numNbFixedColumns = new System.Windows.Forms.NumericUpDown();
+            this.btnCompactMode = new System.Windows.Forms.Button();
             this.comboBox_memorytest = new System.Windows.Forms.ComboBox();
             this.button_memorytest = new System.Windows.Forms.Button();
             this.label_strfilter = new System.Windows.Forms.Label();
@@ -42,7 +48,6 @@
             this.label_sort = new System.Windows.Forms.Label();
             this.label_filter = new System.Windows.Forms.Label();
             this.panel_search = new System.Windows.Forms.Panel();
-            this.advancedDataGridViewSearchToolBar_main = new Zuby.ADGV.AdvancedDataGridViewSearchToolBar();
             this.button_unloadfilters = new System.Windows.Forms.Button();
             this.label_sortsaved = new System.Windows.Forms.Label();
             this.label_filtersaved = new System.Windows.Forms.Label();
@@ -53,24 +58,34 @@
             this.label_total = new System.Windows.Forms.Label();
             this.textBox_total = new System.Windows.Forms.TextBox();
             this.panel_grid = new System.Windows.Forms.Panel();
-            this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
             this.panel_bottom = new System.Windows.Forms.Panel();
             this.bindingSource_main = new System.Windows.Forms.BindingSource(this.components);
             this.statusStrip_main = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_memory = new System.Windows.Forms.ToolStripStatusLabel();
             this.button_toggleVerticalHeader = new System.Windows.Forms.Button();
+            this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
+            this.advancedDataGridViewSearchToolBar_main = new Zuby.ADGV.AdvancedDataGridViewSearchToolBar();
             this.panel_top.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numNbFixedColumns)).BeginInit();
             this.panel_search.SuspendLayout();
             this.panel_grid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).BeginInit();
             this.panel_bottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_main)).BeginInit();
             this.statusStrip_main.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_top
             // 
-            this.panel_top.Controls.Add(this.button1);
+            this.panel_top.Controls.Add(this.lblMinColumnWidth);
+            this.panel_top.Controls.Add(this.numericUpDown2);
+            this.panel_top.Controls.Add(this.lblMaxHeaderHeight);
+            this.panel_top.Controls.Add(this.numericUpDown1);
+            this.panel_top.Controls.Add(this.lblNbFixedColumn);
+            this.panel_top.Controls.Add(this.numNbFixedColumns);
+            this.panel_top.Controls.Add(this.btnCompactMode);
             this.panel_top.Controls.Add(this.comboBox_memorytest);
             this.panel_top.Controls.Add(this.button_memorytest);
             this.panel_top.Controls.Add(this.label_strfilter);
@@ -94,15 +109,82 @@
             this.panel_top.Size = new System.Drawing.Size(971, 192);
             this.panel_top.TabIndex = 0;
             // 
-            // button1
+            // lblMinColumnWidth
             // 
-            this.button1.Location = new System.Drawing.Point(484, 123);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 31);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "Set Vertical Mode";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.lblMinColumnWidth.AutoSize = true;
+            this.lblMinColumnWidth.Location = new System.Drawing.Point(637, 119);
+            this.lblMinColumnWidth.Name = "lblMinColumnWidth";
+            this.lblMinColumnWidth.Size = new System.Drawing.Size(93, 13);
+            this.lblMinColumnWidth.TabIndex = 28;
+            this.lblMinColumnWidth.Text = "Min Column Width";
+            this.lblMinColumnWidth.Visible = false;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(742, 115);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(43, 20);
+            this.numericUpDown2.TabIndex = 27;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Visible = false;
+            // 
+            // lblMaxHeaderHeight
+            // 
+            this.lblMaxHeaderHeight.AutoSize = true;
+            this.lblMaxHeaderHeight.Location = new System.Drawing.Point(637, 97);
+            this.lblMaxHeaderHeight.Name = "lblMaxHeaderHeight";
+            this.lblMaxHeaderHeight.Size = new System.Drawing.Size(99, 13);
+            this.lblMaxHeaderHeight.TabIndex = 26;
+            this.lblMaxHeaderHeight.Text = "Max Header Height";
+            this.lblMaxHeaderHeight.Visible = false;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(742, 93);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(43, 20);
+            this.numericUpDown1.TabIndex = 25;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Visible = false;
+            // 
+            // lblNbFixedColumn
+            // 
+            this.lblNbFixedColumn.AutoSize = true;
+            this.lblNbFixedColumn.Location = new System.Drawing.Point(637, 142);
+            this.lblNbFixedColumn.Name = "lblNbFixedColumn";
+            this.lblNbFixedColumn.Size = new System.Drawing.Size(98, 13);
+            this.lblNbFixedColumn.TabIndex = 24;
+            this.lblNbFixedColumn.Text = "Nb Fixed Column(s)";
+            // 
+            // numNbFixedColumns
+            // 
+            this.numNbFixedColumns.Location = new System.Drawing.Point(742, 138);
+            this.numNbFixedColumns.Name = "numNbFixedColumns";
+            this.numNbFixedColumns.Size = new System.Drawing.Size(43, 20);
+            this.numNbFixedColumns.TabIndex = 23;
+            this.numNbFixedColumns.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // btnCompactMode
+            // 
+            this.btnCompactMode.Location = new System.Drawing.Point(801, 137);
+            this.btnCompactMode.Name = "btnCompactMode";
+            this.btnCompactMode.Size = new System.Drawing.Size(158, 23);
+            this.btnCompactMode.TabIndex = 22;
+            this.btnCompactMode.Text = "Toggle compact header mode";
+            this.btnCompactMode.UseVisualStyleBackColor = true;
+            this.btnCompactMode.Click += new System.EventHandler(this.btnCompactMode_Click);
             // 
             // comboBox_memorytest
             // 
@@ -202,20 +284,6 @@
             this.panel_search.Size = new System.Drawing.Size(971, 28);
             this.panel_search.TabIndex = 10;
             // 
-            // advancedDataGridViewSearchToolBar_main
-            // 
-            this.advancedDataGridViewSearchToolBar_main.AllowMerge = false;
-            this.advancedDataGridViewSearchToolBar_main.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.advancedDataGridViewSearchToolBar_main.Location = new System.Drawing.Point(0, 0);
-            this.advancedDataGridViewSearchToolBar_main.MaximumSize = new System.Drawing.Size(0, 27);
-            this.advancedDataGridViewSearchToolBar_main.MinimumSize = new System.Drawing.Size(0, 27);
-            this.advancedDataGridViewSearchToolBar_main.Name = "advancedDataGridViewSearchToolBar_main";
-            this.advancedDataGridViewSearchToolBar_main.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.advancedDataGridViewSearchToolBar_main.Size = new System.Drawing.Size(971, 27);
-            this.advancedDataGridViewSearchToolBar_main.TabIndex = 0;
-            this.advancedDataGridViewSearchToolBar_main.Text = "advancedDataGridViewSearchToolBar_main";
-            this.advancedDataGridViewSearchToolBar_main.Search += new Zuby.ADGV.AdvancedDataGridViewSearchToolBarSearchEventHandler(this.advancedDataGridViewSearchToolBar_main_Search);
-            // 
             // button_unloadfilters
             // 
             this.button_unloadfilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -314,30 +382,6 @@
             this.panel_grid.Size = new System.Drawing.Size(971, 272);
             this.panel_grid.TabIndex = 1;
             // 
-            // advancedDataGridView_main
-            // 
-            this.advancedDataGridView_main.AllowUserToAddRows = false;
-            this.advancedDataGridView_main.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.advancedDataGridView_main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.advancedDataGridView_main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.advancedDataGridView_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.advancedDataGridView_main.DirectionVertical = true;
-            this.advancedDataGridView_main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.advancedDataGridView_main.FilterAndSortEnabled = true;
-            this.advancedDataGridView_main.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            this.advancedDataGridView_main.Location = new System.Drawing.Point(0, 0);
-            this.advancedDataGridView_main.MaxFilterButtonImageHeight = 23;
-            this.advancedDataGridView_main.Name = "advancedDataGridView_main";
-            this.advancedDataGridView_main.ReadOnly = true;
-            this.advancedDataGridView_main.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.advancedDataGridView_main.RowHeadersVisible = false;
-            this.advancedDataGridView_main.Size = new System.Drawing.Size(971, 238);
-            this.advancedDataGridView_main.SortStringChangedInvokeBeforeDatasourceUpdate = true;
-            this.advancedDataGridView_main.TabIndex = 0;
-            this.advancedDataGridView_main.SortStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.SortEventArgs>(this.advancedDataGridView_main_SortStringChanged);
-            this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.FilterEventArgs>(this.advancedDataGridView_main_FilterStringChanged);
-            // 
             // panel_bottom
             // 
             this.panel_bottom.Controls.Add(this.textBox_total);
@@ -375,6 +419,45 @@
             this.button_toggleVerticalHeader.Size = new System.Drawing.Size(75, 23);
             this.button_toggleVerticalHeader.TabIndex = 0;
             // 
+            // advancedDataGridView_main
+            // 
+            this.advancedDataGridView_main.AllowUserToAddRows = false;
+            this.advancedDataGridView_main.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.advancedDataGridView_main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.advancedDataGridView_main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.advancedDataGridView_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.advancedDataGridView_main.DirectionVertical = false;
+            this.advancedDataGridView_main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.advancedDataGridView_main.FilterAndSortEnabled = true;
+            this.advancedDataGridView_main.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.advancedDataGridView_main.Location = new System.Drawing.Point(0, 0);
+            this.advancedDataGridView_main.MaxFilterButtonImageHeight = 23;
+            this.advancedDataGridView_main.Name = "advancedDataGridView_main";
+            this.advancedDataGridView_main.NbFixedColumns = 2;
+            this.advancedDataGridView_main.ReadOnly = true;
+            this.advancedDataGridView_main.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.advancedDataGridView_main.RowHeadersVisible = false;
+            this.advancedDataGridView_main.Size = new System.Drawing.Size(971, 238);
+            this.advancedDataGridView_main.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.advancedDataGridView_main.TabIndex = 0;
+            this.advancedDataGridView_main.SortStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.SortEventArgs>(this.advancedDataGridView_main_SortStringChanged);
+            this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.FilterEventArgs>(this.advancedDataGridView_main_FilterStringChanged);
+            // 
+            // advancedDataGridViewSearchToolBar_main
+            // 
+            this.advancedDataGridViewSearchToolBar_main.AllowMerge = false;
+            this.advancedDataGridViewSearchToolBar_main.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.advancedDataGridViewSearchToolBar_main.Location = new System.Drawing.Point(0, 0);
+            this.advancedDataGridViewSearchToolBar_main.MaximumSize = new System.Drawing.Size(0, 27);
+            this.advancedDataGridViewSearchToolBar_main.MinimumSize = new System.Drawing.Size(0, 27);
+            this.advancedDataGridViewSearchToolBar_main.Name = "advancedDataGridViewSearchToolBar_main";
+            this.advancedDataGridViewSearchToolBar_main.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.advancedDataGridViewSearchToolBar_main.Size = new System.Drawing.Size(971, 27);
+            this.advancedDataGridViewSearchToolBar_main.TabIndex = 0;
+            this.advancedDataGridViewSearchToolBar_main.Text = "advancedDataGridViewSearchToolBar_main";
+            this.advancedDataGridViewSearchToolBar_main.Search += new Zuby.ADGV.AdvancedDataGridViewSearchToolBarSearchEventHandler(this.advancedDataGridViewSearchToolBar_main_Search);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -389,15 +472,18 @@
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.panel_top.ResumeLayout(false);
             this.panel_top.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numNbFixedColumns)).EndInit();
             this.panel_search.ResumeLayout(false);
             this.panel_search.PerformLayout();
             this.panel_grid.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).EndInit();
             this.panel_bottom.ResumeLayout(false);
             this.panel_bottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_main)).EndInit();
             this.statusStrip_main.ResumeLayout(false);
             this.statusStrip_main.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -433,7 +519,13 @@
         private System.Windows.Forms.Button button_memorytest;
         private System.Windows.Forms.ComboBox comboBox_memorytest;
         private System.Windows.Forms.Button button_toggleVerticalHeader;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCompactMode;
+        private System.Windows.Forms.Label lblNbFixedColumn;
+        private System.Windows.Forms.NumericUpDown numNbFixedColumns;
+        private System.Windows.Forms.Label lblMinColumnWidth;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Label lblMaxHeaderHeight;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

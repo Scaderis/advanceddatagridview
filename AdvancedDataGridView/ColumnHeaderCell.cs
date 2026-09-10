@@ -68,8 +68,8 @@ namespace Zuby.ADGV
         /// <summary>
         /// Control the maximum header height
         /// </summary>
-        public int MaxHeaderHeight { get; set; } = 100; // You can adjust this value as needed
-        public int MinColumnWidth { get; set; } = 50; // You can adjust this value as needed
+        private int MaxHeaderHeight { get; set; } = 100; // You can adjust this value as needed
+        private int MinColumnWidth { get; set; } = 30; // You can adjust this value as needed
 
         #endregion
 
@@ -787,9 +787,7 @@ namespace Zuby.ADGV
             {
                 if (col.HeaderCell is ColumnHeaderCell headerCell)
                 {
-                    // Set the minimum width for the column based on MinCoulmWidth
-                    col.MinimumWidth = headerCell.MinColumnWidth;
-
+                    
                     string headerText = col.HeaderText;
                     using (Graphics g = dgv.CreateGraphics())
                     {
@@ -802,6 +800,9 @@ namespace Zuby.ADGV
                         SizeF textSize;
                         if (headerCell.DirectionVertical)
                         {
+                            // Set the minimum width for the column based on MinCoulmWidth
+                            col.MinimumWidth = headerCell.MinColumnWidth;
+
                             textSize = g.MeasureString(headerText, dgv.ColumnHeadersDefaultCellStyle.Font ?? dgv.Font, 999, format);
                             maxHeight = Math.Max(maxHeight, (int)Math.Ceiling(textSize.Width));
                         }

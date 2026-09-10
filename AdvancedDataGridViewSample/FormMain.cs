@@ -418,9 +418,11 @@ namespace AdvancedDataGridViewSample
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnCompactMode_Click(object sender, EventArgs e)
         {
             // Toggle the DirectionVertical property for all columns at once
+            
+            advancedDataGridView_main.NbFixedColumns = (int)numNbFixedColumns.Value;
             advancedDataGridView_main.DirectionVertical = !advancedDataGridView_main.DirectionVertical;
         }
     }
